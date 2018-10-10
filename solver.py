@@ -42,11 +42,6 @@ class Solver():
                 label_lens = label_lens
                 output = self.lipnet(frames)
                 acts = output.permute(1, 0, 2).contiguous().cpu()  # (75, N, 28)
-                print(output.type())
-                print(acts.type())
-                print(labels.type())
-                print(frame_lens.type())
-                print(label_lens.type())
                 loss = self.ctc_loss(acts, labels, frame_lens, label_lens)
                 loss = loss.mean()
 
@@ -57,7 +52,7 @@ class Solver():
                     print('Skip NaN loss.')
                     continue
 
-                print('Epoch[{}/{}]  Step[{}/{}]  Loss: {.8f}  LR: {.8f}'.format(
+                print('Epoch[{}/{}]  Step[{}/{}]  Loss: {:.8f}  LR: {:.8f}'.format(
                     epoch, self.config.epoch, step + 1, self.train_data.__len__() * 2 // self.config.batch_size,
                     loss.item(), self.optim.param_groups[0]['lr']
                 ))
