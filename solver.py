@@ -33,7 +33,7 @@ class Solver():
                                       config.learning_rate)
 
     def fit(self):
-        for epoch in range(1, self.config.epochs + 1):
+        for epoch in range(1, self.config.epoch + 1):
             for step,(frames, labels, frame_lens, label_lens, text) in enumerate(self.train_loader):
                 frames = frames.to(self.device)
                 labels = labels.to(self.device)
