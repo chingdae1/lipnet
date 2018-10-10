@@ -48,15 +48,14 @@ class LipNet(nn.Module):
         init.constant_(self.fc.bias, 0)
 
     def forward(self, x):
-        x = self.body(x)
-        x = x.view((-1, 75, 96 * 5 * 5))
-        x, _ = self.gru1(x)
-        x, _ = self.gru2(x)
-        print(x.shape)
-        x = x.view((-1, 75 * 512))
-        x = self.fc(x)
-        x = x.view(-1, 75, self.vocab_size + 1)
-        return x  # (N, 75, vocab_size + 1)
+        out = self.body(x)
+        out = out.view((-1, 75, 96 * 5 * 5))
+        out, _ = self.gru1(out)
+        out, _ = self.gru2(out)
+        out = out.view((-1, 75 * 512))
+        out = self.fc(out)
+        out = out.view(-1, 75, self.vocab_size + 1)
+        return out  # (N, 75, vocab_size + 1)
 
 
 if __name__ == '__main__':
