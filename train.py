@@ -13,7 +13,7 @@ def main():
     # Training
     parser.add_argument('--batch_size', type=int, default=8)
     parser.add_argument('--epoch', type=int, default=100)
-    parser.add_argument('--learning_rate', type=float, default=0.0001)
+    parser.add_argument('--learning_rate', type=float, default=0.001)
     parser.add_argument('--decay_after', type=int, default=3)
     parser.add_argument('--decay_every', type=int, default=2)
     parser.add_argument('--decay_rate', type=float, default=0.1)
