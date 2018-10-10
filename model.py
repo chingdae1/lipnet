@@ -59,7 +59,9 @@ class LipNet(nn.Module):
 
 
 if __name__ == '__main__':
-    video_stream = torch.zeros((1, 3, 75, 120, 120))
+    video_stream = torch.zeros((2, 3, 75, 120, 120))
     lipnet = LipNet(27)
     x = lipnet(video_stream)
+    print(x.shape)
+    x = x.permute(1, 0, 2).contiguous()
     print(x.shape)

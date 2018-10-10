@@ -38,6 +38,8 @@ class Solver():
                 print(frames.shape)
                 frames = frames.to(self.device)
                 labels = labels.to(self.device)
+                frame_lens = frame_lens.to(self.device)
+                label_lens = label_lens.to(self.device)
                 output = self.lipnet(frames)
                 acts = output.permute(1, 0, 2).contiguous()  # (75, N, 28)
                 loss = self.ctc_loss(acts, labels, frame_lens, label_lens)
