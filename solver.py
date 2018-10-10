@@ -34,7 +34,8 @@ class Solver():
 
     def fit(self):
         for epoch in range(1, self.config.epoch + 1):
-            for step,(frames, labels, frame_lens, label_lens, text) in enumerate(self.train_loader):
+            for step, (frames, labels, frame_lens, label_lens, text) in enumerate(self.train_loader):
+                print(frames.shape)
                 frames = frames.to(self.device)
                 labels = labels.to(self.device)
                 output = self.lipnet(frames)

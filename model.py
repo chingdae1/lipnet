@@ -52,6 +52,7 @@ class LipNet(nn.Module):
         x = x.view((-1, 75, 96 * 5 * 5))
         x, _ = self.gru1(x)
         x, _ = self.gru2(x)
+        print(x.shape)
         x = x.view((-1, 75 * 512))
         x = self.fc(x)
         x = x.view(-1, 75, self.vocab_size + 1)
