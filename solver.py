@@ -28,7 +28,7 @@ class Solver():
                                      drop_last=True)
         # self.test_data
         self.lipnet = LipNet(config.vocab_size).to(self.device)
-        self.ctc_loss = CTCLoss().to(self.device)
+        self.ctc_loss = CTCLoss()
         self.optim = torch.optim.Adam(self.lipnet.parameters(),
                                       config.learning_rate)
 
@@ -37,11 +37,11 @@ class Solver():
             for step, (frames, labels, frame_lens, label_lens, text) in enumerate(self.train_loader):
                 print(frames.shape)
                 frames = frames.to(self.device)
-                labels = labels.to(self.device)
-                frame_lens = frame_lens.to(self.device)
-                label_lens = label_lens.to(self.device)
+                labels = labels
+                frame_lens = frame_lens
+                label_lens = label_lens
                 output = self.lipnet(frames)
-                acts = output.permute(1, 0, 2).contiguous().to(self.device)  # (75, N, 28)
+                acts = output.permute(1, 0, 2).contiguous().cpu()  # (75, N, 28)
                 print(output.type())
                 print(acts.type())
                 print(labels.type())
