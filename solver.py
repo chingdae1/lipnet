@@ -6,7 +6,7 @@ from dataset import get_loader
 from model import LipNet
 from math import sqrt
 from warpctc_pytorch import CTCLoss
-
+from CTCdecoder import Decoder
 
 class Solver():
     def __init__(self, config):
