@@ -52,7 +52,7 @@ class LipNet(nn.Module):
         out = out.view((-1, 75, 96 * 5 * 5))
         out, _ = self.gru1(out)
         out, _ = self.gru2(out)
-        out = out.view((-1, 75 * 512))
+        out = out.contiguous().view((-1, 75 * 512))
         out = self.fc(out)
         out = out.view(-1, 75, self.vocab_size + 1)
         return out  # (N, 75, vocab_size + 1)
