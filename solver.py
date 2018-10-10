@@ -39,7 +39,7 @@ class Solver():
                 frames = frames.to(self.device)
                 labels = labels.to(self.device)
                 output = self.lipnet(frames)
-                acts = output.permute(1, 0, 2)  # (75, N, 28)
+                acts = output.permute(1, 0, 2).contiguous()  # (75, N, 28)
                 loss = self.ctc_loss(acts, labels, frame_lens, label_lens)
                 loss = loss.mean()
 
