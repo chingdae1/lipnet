@@ -52,7 +52,7 @@ class Solver():
                     continue
 
                 print('Epoch[{}/{}]  Step[{}/{}]  Loss: {:.8f}  LR: {:.8f}'.format(
-                    epoch, self.config.epoch, step + 1, self.train_data.__len__() * 2 // self.config.batch_size,
+                    epoch, self.config.epoch, step + 1, self.train_data.__len__() // self.config.batch_size,
                     loss.item(), self.optim.param_groups[0]['lr']
                 ))
 
